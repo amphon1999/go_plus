@@ -1,0 +1,22 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <div routerLinkActive="active">
+    <a routerLink="/dashboard" class="brand-link">
+      <img src="assets/dist/img/logotest.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        style="opacity: .8">
+      <span class="brand-text font-weight-light"><strong class="text-warning">GO </strong> <strong class="text-primary">PLUS</strong></span>
+    </a>
+  </div>
+
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <app-profile-menu></app-profile-menu>
+    <app-search-menu></app-search-menu>
+    <app-shopping-menu *ngIf="true"></app-shopping-menu>
+    <app-sap-menu *ngIf="this.rest.isSapUser()"></app-sap-menu>
+    <app-settings-menu *ngIf="true"></app-settings-menu>
+  </div>
+  <!-- /.sidebar -->
+</aside>

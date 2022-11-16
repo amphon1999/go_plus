@@ -1,0 +1,72 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="col-md-10 offset-md-1">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Shopping List</h1>
+        </div>
+        <div class="col-sm-6 d-flex flex-row justify-content-end ">
+          <div class="nav-item text-right" routerLinkActive="active">
+            <a routerLink="/shop" class="nav-link" role="button">
+              <i class="fa fa-list"></i>
+            </a>
+          </div>
+          <div class="breadcrumb mt-1">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Shopping List</li>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="col-md-10 offset-md-1">
+      <div class="row">
+        <div class="col-12">
+          <!-- search -->
+          <div id = "menu" class="menu-customer">
+            <app-search-shop (searchBrandChanged)="onSearchBrandEntered($event)"></app-search-shop>
+          </div>
+          <!-- /.card -->
+          <div>
+            <div class="card-header">
+              <h3 class="card-title">แสดงผลลัพธ์คำค้นหา</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="center" >
+              <div class="container" >
+                <div class="row justify-content-center">
+                    <ng-container *ngFor="let part of partList | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                        <div class="card col-md-3 " *ngIf="searchBrand == '' || part.Brand.toLowerCase().includes(searchBrand)">
+                            <img src="/assets/dist/img/logo GP_1.png" alt="" class="center">
+                            <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;" >{{part.Brand}}</h5>
+                            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{part.ItemName}}</td>
+                            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{part.ItemCode}}/{{part.ItemCodeNew}}</td>
+                            <td style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{part.Model}}</td> 
+                            <p><strong>ราคา: </strong>{{part.RetailPrice}} บาท</p>
+                            <td><button type="button" (click)="onSelect(part.Brand)"
+                              class="btn btn-outline-primary btn-block toastrDefaultSuccess"><i
+                                class="fas fa-cart-plus"></i><b>
+                                เพิ่มตะกร้า</b></button></td>
+                        </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>            
+            <!-- /.card-body -->
+          </div>
+          <div class="row justify-content-center">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
